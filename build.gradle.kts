@@ -25,10 +25,6 @@ java {
 }
 
 tasks {
-    jar {
-        from(rootProject.file("LICENSE"))
-    }
-
     compileJava {
         dependsOn("stonecutterGenerate")
     }
