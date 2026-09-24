@@ -5,7 +5,6 @@ on:
     inputs:
       minecraft_versions:
         description: Minecraft versions to publish; blank publishes all
-        default: "26.3"
         required: false
         type: string
       dry_run:
