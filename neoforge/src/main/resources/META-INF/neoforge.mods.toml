@@ -1,0 +1,29 @@
+modLoader = "javafml"
+loaderVersion = "${neoforge_loader_range}"
+license = "${mod_license}"
+issueTrackerURL = "https://github.com/khazoda-mods/hbhap/issues"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+logoFile = "assets/${mod_id}/banner.png"
+logoBlur = false
+displayName = "${mod_name}"
+displayURL = "https://khazoda.com#hbhap"
+issueTrackerURL = "https://github.com/khazoda-mods/hbhap/issues"
+authors = "${mod_author}"
+description = '''${mod_description}'''
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range_neoforge}"
+ordering = "NONE"
+side = "CLIENT"
+
+[[mixins]]
+config = "hbhap.mixins.json"
+
+[modproperties.${mod_id}]
+catalogueImageIcon = "assets/${mod_id}/icon.png"
+catalogueBackground = "assets/${mod_id}/background.png"

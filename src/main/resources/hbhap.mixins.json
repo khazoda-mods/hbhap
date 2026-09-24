@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.khazoda.hbhap.mixin",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "GuiMixin",
+    "LivingEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
