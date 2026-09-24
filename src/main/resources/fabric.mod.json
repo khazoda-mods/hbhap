@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "${description}",
+  "icon": "assets/${id}/icon.png",
+  "authors": ["${authors}"],
+  "contact": {
+    "homepage": "${homepage}",
+    "sources": "${sources}",
+    "issues": "${issues}"
+  },
+  "license": "${license}",
+  "environment": "client",
+  "mixins": [
+    "hbhap.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader}",
+    "minecraft": "${fabric_minecraft}",
+    "java": ">=25"
+  },
+  "custom": {
+    "catalogue": {
+      "banner": "assets/${id}/banner.png",
+      "background": "assets/${id}/background.png"
+    }
+  }
+}

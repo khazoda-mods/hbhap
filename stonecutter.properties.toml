@@ -1,0 +1,28 @@
+mod.id = "hbhap"
+mod.slug = "hbhap"
+mod.name = "Hidden Beacon HUD And Particles"
+mod.version = "1.0.0"
+mod.description = "Hides ambient status-effect icons and the player's ambient effect particles."
+mod.authors = "khazoda"
+mod.license = "GPLv3"
+mod.homepage = "https://khazoda.com#hbhap"
+mod.sources = "https://github.com/khazoda-mods/hbhap"
+mod.issues = "https://github.com/khazoda-mods/hbhap/issues"
+
+deps.fabric_loader = "0.19.3"
+deps.neoforge_loader = "[4,)"
+
+["26.1"]
+mod.mc_releases = ["26.1", "26.1.1", "26.1.2"]
+mod.mc_compat_fabric = ">=26.1 <26.2"
+mod.mc_compat_neoforge = "[26.1,26.2)"
+
+["26.2"]
+mod.mc_releases = ["26.2"]
+mod.mc_compat_fabric = ">=26.2 <26.3"
+mod.mc_compat_neoforge = "[26.2,26.3)"
+
+["26.3"]
+mod.mc_releases = ["26.3"]
+mod.mc_compat_fabric = ">=26.3 <26.4"
+mod.mc_compat_neoforge = "[26.3,26.4)"

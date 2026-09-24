@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      minecraft_versions:
+        description: Minecraft versions to publish; blank publishes all
+        default: "26.3"
+        required: false
+        type: string
+      dry_run:
+        description: Build without uploading
+        default: false
+        type: boolean
+      publish_curseforge:
+        description: Publish to CurseForge
+        default: true
+        type: boolean
+      publish_modrinth:
+        description: Publish to Modrinth
+        default: true
+        type: boolean
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    environment: release
+    env:
+      PUBLISH_VERSIONS: ${{ inputs.minecraft_versions }}
+      CURSEFORGE_PROJECT_ID: ${{ vars.CURSEFORGE_PROJECT_ID }}
+      MODRINTH_PROJECT_ID: ${{ vars.MODRINTH_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "25"
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build
+        run: ./gradlew buildAll --console plain
+
+      - name: Publish to CurseForge
+        if: ${{ inputs.publish_curseforge }}
+        env:
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+        run: |
+          CHANGELOG="$(cat CHANGELOG.md)" ./gradlew publishMods \
+            -PpublishDryRun=${{ inputs.dry_run }} \
+            -PpublishCurseForge=true \
+            -PpublishModrinth=false \
+            --no-parallel --console plain
+
+      - name: Publish to Modrinth
+        if: ${{ inputs.publish_modrinth }}
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: |
+          CHANGELOG="$(cat CHANGELOG.md)" ./gradlew publishMods \
+            -PpublishDryRun=${{ inputs.dry_run }} \
+            -PpublishCurseForge=false \
+            -PpublishModrinth=true \
+            --no-parallel --console plain
