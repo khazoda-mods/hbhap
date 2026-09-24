@@ -1,0 +1,35 @@
+plugins {
+    id 'net.neoforged.moddev.legacyforge'
+}
+
+legacyForge {
+    enable {
+        forgeVersion = forge_version
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+    runs {
+        client {
+            client()
+            gameDirectory = file('run')
+        }
+    }
+}
+
+dependencies {
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+mixin {
+    add sourceSets.main, 'hbhap.refmap.json'
+    config 'hbhap.mixins.json'
+}
+
+jar {
+    manifest {
+        attributes 'MixinConfigs': 'hbhap.mixins.json'
+    }
+}

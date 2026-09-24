@@ -1,0 +1,57 @@
+plugins {
+    id 'fabric-loom' version '1.7-SNAPSHOT' apply false
+    id 'net.neoforged.moddev.legacyforge' version '2.0.147' apply false
+}
+
+version = "${mod_version}+${minecraft_version}"
+group = maven_group
+
+subprojects {
+    apply plugin: 'java'
+    version = rootProject.version
+    group = rootProject.group
+
+    base {
+        archivesName = "${archives_base_name}-${project.name}"
+    }
+
+    java {
+        toolchain.languageVersion = JavaLanguageVersion.of(17)
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        options.release = 17
+    }
+
+    sourceSets.main.java.srcDir(rootProject.file('src/main/java'))
+    sourceSets.main.resources.srcDir(rootProject.file('src/main/resources'))
+
+    processResources {
+        def props = [
+            mod_id: mod_id,
+            mod_name: mod_name,
+            mod_version: mod_version,
+            mod_description: mod_description,
+            mod_author: mod_author,
+            mod_license: mod_license,
+            minecraft_version_range_fabric: minecraft_version_range_fabric,
+            minecraft_version_range_forge: minecraft_version_range_forge,
+            minecraft_version_range_neoforge: minecraft_version_range_neoforge,
+            fabric_loader_version: fabric_loader_version,
+            forge_loader_range: forge_loader_range,
+            neoforge_loader_range: neoforge_loader_range,
+            java_version: 17
+        ]
+        inputs.properties(props)
+        filesMatching(['fabric.mod.json', 'META-INF/*mods.toml']) {
+            expand props
+        }
+    }
+
+}
+
+tasks.register('build') {
+    group = 'build'
+    dependsOn ':fabric:build', ':forge:build', ':neoforge:build'
+}

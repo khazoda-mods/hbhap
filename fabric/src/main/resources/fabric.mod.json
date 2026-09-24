@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "icon": "assets/${mod_id}/icon.png",
+  "authors": ["${mod_author}"],
+  "contact": {
+    "homepage": "https://khazoda.com#hbhap",
+    "sources": "https://github.com/khazoda-mods/hbhap",
+    "issues": "https://github.com/khazoda-mods/hbhap/issues"
+  },
+  "license": "${mod_license}",
+  "environment": "client",
+  "mixins": ["hbhap.mixins.json"],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "${minecraft_version_range_fabric}",
+    "java": ">=17"
+  },
+  "custom": {
+    "catalogue": {
+      "banner": "assets/${mod_id}/banner.png",
+      "background": "assets/${mod_id}/background.png"
+    }
+  }
+}
